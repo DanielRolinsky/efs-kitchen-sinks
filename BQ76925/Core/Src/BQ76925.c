@@ -48,10 +48,28 @@ void init_BQ76925(I2C_HandleTypeDef *hi2c1) {
 	// Figure out what values to return and how to calculate calibration later
 }
 
+/* Test function for I2C, get rid of later
 uint8_t test_read_reg(I2C_HandleTypeDef *hi2c1) {
 	uint8_t data = 0;
 	uint8_t *data_ptr = &data;
 	read_byte(hi2c1, STATUS, data_ptr);
 	return *data_ptr;
 }
+*/
+
+
+// List of driver functions
+// PRIVATE:
+// read_byte()
+// write_byte()
+
+// PUBLIC:
+// init()
+// get_ADC_calibration()
+// measure_cell()
+// enable_NTC()
+// balance_cells()
+// enter_sleep()
+
+
 
