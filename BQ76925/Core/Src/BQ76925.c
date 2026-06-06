@@ -41,7 +41,21 @@ static void write_byte(I2C_HandleTypeDef *hi2c1, uint8_t reg, uint8_t *data) {
 
 
 void init_BQ76925(I2C_HandleTypeDef *hi2c1) {
-	// Init
+
+	// 2ms wait for I2C bootup
+	HAL_Delay(2);
+
+	// 1. Verify I2C is working, read status register and chip id
+	uint8_t sensor_status = 0x00;
+	read_byte(hi2c1, STATUS, &sensor_status);
+
+	uint8_t chip_id = 0x00;
+	read_byte(hi2c1, CHIP_ID, &chip_id); 
+
+	// NOTE: We should not use a CRC byte, for now, don't know if we need to disable this in the CONFIG_2 register
+	// Additional note: Read automatically uses CRC byte, but can ignore
+
+
 	uint8_t vref_cal = 0;
 	uint8_t *ptr_data = &vref_cal;
 	read_byte(hi2c1, VREF_CAL, ptr_data);
